@@ -1,5 +1,5 @@
 <?php
-//11-07-2018
+//27-11-2018
 //started on 01-06-2017
 // La app di Heroku si puo richiamare da browser con
 //			https://cucinazie.herokuapp.com/
@@ -68,7 +68,7 @@ elseif($text=="/ion_eoff"){
 elseif($text=="/ioff_eon"){
 	$response = file_get_contents("http://dario95.ddns.net:8083/rele/3/1");
 }
-elseif($text=="/off_off"){
+elseif(strpos($text,"off_off")){
 	$response = file_get_contents("http://dario95.ddns.net:8083/rele/3/0");
 }
 //<-- Lettura parametri slave3
@@ -94,7 +94,7 @@ else
 $parameters = array('chat_id' => $chatId, "text" => $response);
 $parameters["method"] = "sendMessage";
 // imposto la keyboard
-$parameters["reply_markup"] = '{ "keyboard": [["/on_on", "/Ion_Eoff"],["/Ioff_Eon", "/off_off"],["/cucina","/verbose","help"]], "resize_keyboard": true, "one_time_keyboard": false}';
+$parameters["reply_markup"] = '{ "keyboard": [["/on_on", "/Ion_Eoff"],["/Ioff_Eon", "/off_off \ud83d\udd35"],["/cucina","/verbose","help"]], "one_time_keyboard": false}';
 // converto e stampo l'array JSON sulla response
 echo json_encode($parameters);
 ?>
