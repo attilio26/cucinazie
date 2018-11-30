@@ -1,5 +1,5 @@
 <?php
-//28-11-2018
+//30-11-2018
 //started on 01-06-2017
 // La app di Heroku si puo richiamare da browser con
 //			https://cucinazie.herokuapp.com/
@@ -53,8 +53,8 @@ $helptext = "List of commands :
 /cucina  -> Lettura stazione3 ... su bus RS485
 ";
 
-if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
-	$response = "Ciao $firstname, benvenuto   \n". $helptext; 
+elseif(strpos($text,"on_on")){
+	$response = file_get_contents("http://dario95.ddns.net:8083/rele/3/3");
 }
 //Pilotaggio dei DUE rele su ESPlogger  http://dario95.ddns.net:8081
 
@@ -94,7 +94,7 @@ else
 $parameters = array('chat_id' => $chatId, "text" => $response);
 $parameters["method"] = "sendMessage";
 // imposto la keyboard
-$parameters["reply_markup"] = '{ "keyboard": [["/on_on", "/Ion_Eoff"],["/Ioff_Eon", "/off_off \ud83d\udd35"],["/cucina"]], "one_time_keyboard": false,  "resize_keyboard": true}';
+$parameters["reply_markup"] = '{ "keyboard": [["/on_on \ud83d\udd34", "/Ion_Eoff"],["/Ioff_Eon", "/off_off \ud83d\udd35"],["/cucina"]], "one_time_keyboard": false,  "resize_keyboard": true}';
 // converto e stampo l'array JSON sulla response
 echo json_encode($parameters);
 ?>
