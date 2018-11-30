@@ -80,8 +80,6 @@ elseif($text=="/verbose"){
 	$response = "chatId ".$chatId. "   messId ".$messageId. "  user ".$username. "   lastname ".$lastname. "   firstname ".$firstname. "\n". $helptext ;	
 	$response = $response. "\n\n Heroku + dropbox gmail.com";
 }
-
-
 else
 {
 	$response = "Unknown command!";			//<---Capita quando i comandi contengono lettere maiuscole
@@ -92,10 +90,8 @@ else
 // text è il testo della risposta
 $parameters = array('chat_id' => $chatId, "text" => $response);
 $parameters["method"] = "sendMessage";
-// Gli EMOTICON sono a:     http://www.charbase.com/block/miscellaneous-symbols-and-pictographs
-//													https://unicode.org/emoji/charts/full-emoji-list.html
-//													https://apps.timwhitlock.info/emoji/tables/unicode
-$parameters["reply_markup"] = '{ "keyboard": [["/on_on \ud83d\udd34", "/lon_toff \ud83d\udd06"],["/loff_ton \ud83c\udfa6", "/off_off \ud83d\udd35"],["/pranzo"]], "one_time_keyboard": false,  "resize_keyboard": true}';
+// imposto la keyboard
+$parameters["reply_markup"] = '{ "keyboard": [["/on_on \ud83d\udd34", "/Ion_Eoff"],["/Ioff_Eon", "/off_off \ud83d\udd35"],["/cucina"]], "one_time_keyboard": false,  "resize_keyboard": true}';
 // converto e stampo l'array JSON sulla response
 echo json_encode($parameters);
 ?>
