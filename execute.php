@@ -59,20 +59,20 @@ if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
 
 //<-- Comandi ai rele
 elseif(strpos($text,"on_on")){
-	$response = file_get_contents("http://dario95.ddns.net:8083/rele/2/3");
+	$response = file_get_contents("http://dario95.ddns.net:8083/rele/3/3");
 }
-elseif(strpos($text,"lon_toff")){
-	$response = file_get_contents("http://dario95.ddns.net:8083/rele/2/2");
+elseif($text=="/ion_eoff"){
+	$response = file_get_contents("http://dario95.ddns.net:8083/rele/3/2");
 }
-elseif(strpos($text,"loff_ton")){
-	$response = file_get_contents("http://dario95.ddns.net:8083/rele/2/1");
+elseif($text=="/ioff_eon"){
+	$response = file_get_contents("http://dario95.ddns.net:8083/rele/3/1");
 }
 elseif(strpos($text,"off_off")){
-	$response = file_get_contents("http://dario95.ddns.net:8083/rele/2/0");
+	$response = file_get_contents("http://dario95.ddns.net:8083/rele/3/0");
 }
-//<-- Lettura parametri slave5
-elseif($text=="/pranzo"){
-	$response = file_get_contents("http://dario95.ddns.net:8083/pranzo");
+//<-- Lettura parametri slave3
+elseif($text=="/cucina"){
+	$response = file_get_contents("http://dario95.ddns.net:8083/cucina");
 }
 
 //<-- Manda a video la risposta completa
