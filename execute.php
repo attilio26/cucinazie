@@ -53,33 +53,32 @@ $helptext = "List of commands :
 /cucina  -> Lettura stazione3 ... su bus RS485
 ";
 
-elseif(strpos($text,"on_on")){
-	$response = file_get_contents("http://dario95.ddns.net:8083/rele/3/3");
+if(strpos($text, "/start") === 0 || $text=="ciao" || $text == "help"){
+	$response = "Ciao $firstname, benvenuto   \n". $helptext; 
 }
-//Pilotaggio dei DUE rele su ESPlogger  http://dario95.ddns.net:8081
 
 //<-- Comandi ai rele
 elseif(strpos($text,"on_on")){
-	$response = file_get_contents("http://dario95.ddns.net:8083/rele/3/3");
+	$response = file_get_contents("http://dario95.ddns.net:8083/rele/2/3");
 }
-elseif($text=="/ion_eoff"){
-	$response = file_get_contents("http://dario95.ddns.net:8083/rele/3/2");
+elseif(strpos($text,"lon_toff")){
+	$response = file_get_contents("http://dario95.ddns.net:8083/rele/2/2");
 }
-elseif($text=="/ioff_eon"){
-	$response = file_get_contents("http://dario95.ddns.net:8083/rele/3/1");
+elseif(strpos($text,"loff_ton")){
+	$response = file_get_contents("http://dario95.ddns.net:8083/rele/2/1");
 }
 elseif(strpos($text,"off_off")){
-	$response = file_get_contents("http://dario95.ddns.net:8083/rele/3/0");
+	$response = file_get_contents("http://dario95.ddns.net:8083/rele/2/0");
 }
-//<-- Lettura parametri slave3
-elseif($text=="/cucina"){
-	$response = file_get_contents("http://dario95.ddns.net:8083/cucina");
+//<-- Lettura parametri slave5
+elseif($text=="/pranzo"){
+	$response = file_get_contents("http://dario95.ddns.net:8083/pranzo");
 }
 
 //<-- Manda a video la risposta completa
 elseif($text=="/verbose"){
-	$response = "chatId ".$chatId. "   messId ".$messageId. "  user ".$username. "   lastname ".$lastname. "   firstname ".$firstname . "\n". $helptext ;
-	$response = $response. "\n\n Heroku + dropbox libero.it";	
+	$response = "chatId ".$chatId. "   messId ".$messageId. "  user ".$username. "   lastname ".$lastname. "   firstname ".$firstname. "\n". $helptext ;	
+	$response = $response. "\n\n Heroku + dropbox gmail.com";
 }
 
 
@@ -93,8 +92,10 @@ else
 // text è il testo della risposta
 $parameters = array('chat_id' => $chatId, "text" => $response);
 $parameters["method"] = "sendMessage";
-// imposto la keyboard
-$parameters["reply_markup"] = '{ "keyboard": [["/on_on \ud83d\udd34", "/Ion_Eoff"],["/Ioff_Eon", "/off_off \ud83d\udd35"],["/cucina"]], "one_time_keyboard": false,  "resize_keyboard": true}';
+// Gli EMOTICON sono a:     http://www.charbase.com/block/miscellaneous-symbols-and-pictographs
+//													https://unicode.org/emoji/charts/full-emoji-list.html
+//													https://apps.timwhitlock.info/emoji/tables/unicode
+$parameters["reply_markup"] = '{ "keyboard": [["/on_on \ud83d\udd34", "/lon_toff \ud83d\udd06"],["/loff_ton \ud83c\udfa6", "/off_off \ud83d\udd35"],["/pranzo"]], "one_time_keyboard": false,  "resize_keyboard": true}';
 // converto e stampo l'array JSON sulla response
 echo json_encode($parameters);
 ?>
