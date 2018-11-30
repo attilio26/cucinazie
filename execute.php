@@ -59,7 +59,7 @@ elseif(strpos($text,"on_on")){
 //Pilotaggio dei DUE rele su ESPlogger  http://dario95.ddns.net:8081
 
 //<-- Comandi ai rele
-elseif($text=="/on_on"){
+elseif(strpos($text,"on_on")){
 	$response = file_get_contents("http://dario95.ddns.net:8083/rele/3/3");
 }
 elseif($text=="/ion_eoff"){
